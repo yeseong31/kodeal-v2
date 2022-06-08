@@ -6,7 +6,7 @@ from pybo.models import Question
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    search_fields = ['sbject']
+    search_fields = ['subject']
 
 
 admin.site.register(Question, QuestionAdmin)
