@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'photo.apps.PhotoConfig',
+    'photo.apps.PhotoConfig',    # photo
+    'pybo.apps.PyboConfig',    # pybo
 ]
 
 MIDDLEWARE = [
