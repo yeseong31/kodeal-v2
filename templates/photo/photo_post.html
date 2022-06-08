@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1><a href="{% url 'photo:photo_list' %}">홈으로 돌아가기</a></h1>
+<section>
+    <h2>New Photo</h2>
+    <form method="post" >
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">완료!</button>
+    </form>
+</section>
+
+{% endblock %}
