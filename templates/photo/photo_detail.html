@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>{{ photo.title }}</h1>
+<h3><a href="{% url 'photo:photo_edit' pk=photo.pk %}">Edit Photo</a></h3>
 <section>
     <div>
         <img src="{{ photo.image }}" alt="{{ photo.title }}" width="300">
