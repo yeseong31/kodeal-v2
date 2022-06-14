@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -11,7 +12,13 @@ def index(request):
     전체 질문 목록 조회
     """
     question_list = Question.objects.order_by('-create_date')
-    context = {'question_list': question_list}
+
+    # 페이징 처리
+    page = request.GET.get('page', '1')    # '/pybo/?page=1' 형태로 호출된 URL에서 page를 가져옴
+    paginator = Paginator(question_list, 10)    # 한 페이지 당 10개의 질문
+    page_obj = paginator.get_page(page)    # 페이징 객체 생성
+
+    context = {'question_list': page_obj}
     return render(request, 'pybo/question_list.html', context)
 
 
