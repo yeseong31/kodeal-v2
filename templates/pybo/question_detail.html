@@ -33,8 +33,8 @@
     <!-- 답변 등록 -->
     <form action="{% url 'pybo:answer_create' question.id %}" method="post" class="my-3">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="content" class="form-label">답변 내용</label>
+        {% include 'form_errors.html' %}
+        <div class="form-group">
             <textarea name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
         <input type="submit" value="답변 등록" class="btn btn-primary">
