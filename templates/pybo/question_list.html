@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+        <li>
+           <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>질문이 없습니다.</p>
+{% endif %}
+
+{% endblock %}
