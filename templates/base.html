@@ -18,10 +18,13 @@
 
 </head>
 <body>
+    <!-- 내비게이션 바 -->
     {% include 'navBar.html' %}
     <!-- ########## 기본 템플릿 안에 삽입될 내용 start ########## -->
     {% block content %}
     {% endblock %}
     <!-- ########## 기본 템플릿 안에 삽입될 내용  end  ########## -->
+    <!-- Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>
