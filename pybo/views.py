@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404, redirect
@@ -32,6 +33,7 @@ def detail(request, question_id):
     return render(request, 'pybo/question_detail.html', context)
 
 
+@login_required(login_url='common:signin')
 def answer_create(request, question_id):
     """
     pybo 답변 등록
@@ -41,6 +43,7 @@ def answer_create(request, question_id):
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save(commit=False)
+            answer.author = request.user    # author 속성에 로그인 한 사용자의 계정을 저장
             answer.create_date = timezone.now()
             answer.question = question
             answer.save()
@@ -51,6 +54,7 @@ def answer_create(request, question_id):
     return render(request, 'pybo/question_detail.html', context)
 
 
+@login_required(login_url='common:signin')
 def question_create(request):
     """
     pybo 질문 등록
@@ -61,6 +65,8 @@ def question_create(request):
         if form.is_valid():
             # 임시 저장하여 question 객체를 return 받음
             question = form.save(commit=False)
+            # author 속성에 로그인 한 사용자의 계정을 저장
+            question.author = request.user
             # create_date 속성은 데이터 저장 시점에 생성해야 하는 값이므로 QuestionForm에 등록하여 사용하지 않음
             question.create_date = timezone.now()
             # 데이터를 실제로 저장
