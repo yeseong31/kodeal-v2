@@ -1,0 +1,23 @@
+{% block content %}
+
+<!-- 출력 메시지 -->
+<input type="hidden" id="msg" value="{{ msg|default_if_none:'' }}">
+<!-- 이동 URL -->
+<input type="hidden" id="next_url" value="{{ url|default_if_none:'' }}">
+
+{% endblock %}
+
+<!-- Javascript -->
+{% block script %}
+<script type='text/javascript'>
+function showPopup(message){
+    alert(message);
+}
+
+let msg = document.getElementById("msg").value;
+let url = document.getElementById("next_url").value;
+
+if (msg != "") { showPopup(msg) }
+location.href = url;
+</script>
+{% endblock %}
