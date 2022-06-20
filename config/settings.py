@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'photo.apps.PhotoConfig',    # photo
     'pybo.apps.PyboConfig',    # pybo
     'common.apps.CommonConfig',    # common
-    'kodeal.apps.KodealConfig',    # kodeal
 ]
 
 MIDDLEWARE = [
