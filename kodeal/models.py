@@ -4,20 +4,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class Keyword(models.Model):
-    """
-    OpenAI Codex Keyword Model
-    """
-    id = models.AutoField(primary_key=True)
-    content = models.CharField(max_length=100, verbose_name='키워드')
-
-    def __str__(self):
-        return self.id
-
-    class Meta:
-        db_table = 'kodeal_keyword'
-
-
 class Question(models.Model):
     """
     OpenAI Codex Question Model
@@ -26,9 +12,8 @@ class Question(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_q',
                                verbose_name='질문 작성자')
     content = models.TextField(verbose_name='질문 내용')
-    language = models.CharField(max_length=30, null=True, blank=True, verbose_name='사용 언어')
+    language = models.CharField(max_length=30, verbose_name='사용 언어')
     voter = models.ManyToManyField(User, related_name='voter_q', verbose_name='추천인')
-    keyword = models.ManyToManyField(Keyword, related_name='keyword_q', verbose_name='키워드')
     create_date = models.DateTimeField(verbose_name='생성일')
     modify_date = models.DateTimeField(null=True, blank=True, verbose_name='수정일')
 
@@ -57,6 +42,22 @@ class Answer(models.Model):
 
     class Meta:
         db_table = 'kodeal_codex_answer'
+
+
+class Keyword(models.Model):
+    """
+    OpenAI Codex Keyword Model
+    """
+    id = models.AutoField(primary_key=True)
+    content = models.CharField(max_length=100, verbose_name='키워드')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='연관된 질문')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_k', verbose_name='질문 작성자')
+
+    def __str__(self):
+        return self.id
+
+    class Meta:
+        db_table = 'kodeal_keyword'
 
 
 class Papago(models.Model):
