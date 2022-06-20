@@ -11,7 +11,6 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from common.forms import UserForm
 from config.my_settings import EMAIL, JWT_SECRET_KEY
-from common.tokens import message
 
 
 def signup(request):
@@ -83,3 +82,12 @@ def activate(request, uidb64, token):
             return JsonResponse({"message": "TYPE_ERROR"}, status=400)
         except KeyError:
             return JsonResponse({"message": "INVALID_KEY"}, status=400)
+
+
+def message(domain, uidb64, token):
+    """
+    Active를 담당하는 Endpoint URL 주소를 메시지로 Send
+    """
+    return f"아래 링크를 클릭하면 회원가입 인증이 완료됩니다.\n\n" \
+           f"회원가입 링크 : http://{domain}/common/activate/{uidb64}/{token}\n\n" \
+           f"감사합니다."
