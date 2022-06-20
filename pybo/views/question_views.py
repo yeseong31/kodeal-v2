@@ -67,3 +67,16 @@ def question_delete(request, question_id):
     else:
         question.delete()
     return redirect('pybo:index')
+
+
+@login_required(login_url='common:signin')
+def question_vote(request, question_id):
+    """
+    pybo 질문 추천
+    """
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user == question.author:
+        messages.error(request, '본인이 작성한 글은 추천할 수 없습니다.')
+    else:
+        question.voter.add(request.user)    # 동일한 사용자에 의해 계속 호출되더라도 ManyToManyField에서 자체 처리함
+    return redirect('pybo:detail', question_id=question.id)
