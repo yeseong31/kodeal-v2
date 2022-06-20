@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">OpenAI Codex에게 질문을!</h5>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Form 메인 -->
+        <div class="mb-3">
+            <label for="content" class="form-label">질문</label>
+            <textarea class="form-control" name="content"
+                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="language" class="form-label">언어</label>
+            <input type="text" class="form-control" name="language" id="language"
+                   value="{{ form.language.value|default_if_none:'' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">등록</button>
+    </form>
+    <br>
+    {% include 'form_errors.html' %}
+</div>
+
+{% endblock %}

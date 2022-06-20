@@ -18,7 +18,7 @@ def signup(request):
 
             # Form 저장 시 사용자 저장 및 인증 호출이 자동으로 이루어지므로 위의 과정 생략
             user = form.save()
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            login(request, user)
             return redirect('kodeal:index')
     else:
         form = UserForm()

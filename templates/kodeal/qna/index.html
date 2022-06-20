@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load kodeal_filter %}
+
+<!-- 타이틀 -->
+{% block title %}
+<title>Kodeal QnA</title>
+{% endblock %}
+
+<!-- BODY -->
+{% block content %}
+
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">QnA 페이지</h5>
+    <!-- 검색 창 -->
+    <div class="row my-3">
+        <!-- 질문 등록 버튼 -->
+        <div class="col-6">
+            <a href="{% url 'kodeal:question_create' %}" class="btn btn-primary">질문 등록</a>
+        </div>
+    </div>
+    <!-- 질문 목록 -->
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th>#</th>
+            <th style="width:50%">Question</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if question_list %}
+            {% for question in question_list %}
+            <tr>
+                <!-- 템플릿 필터 적용: 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                <td>
+                    {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}
+                </td>
+                <!-- Question -->
+                <td>
+                    <a href="#">{{ question.content }}</a>
+                </td>
+                <!-- 작성자 -->
+                <td>{{ question.author.username }}</td>
+                <!-- 작성일 -->
+                <td>{{ question.create_date.date }} {{ question.create_date.time }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="4">등록된 게시물이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <!-- 페이징 처리 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전 페이지 -->
+        {% if question_list.has_previous %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ question_list.previous_page_number }}" href="javascript:void(0)">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지 리스트 -->
+        {% for page_number in question_list.paginator.page_range %}
+            {% if page_number >= start and page_number <= end %}
+                <!-- 현재 페이지 강조 -->
+                {% if page_number == question_list.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+                </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <!-- 다음 페이지 -->
+        {% if question_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ question_list.next_page_number }}" href="javascript:void(0)">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+
+</script>
+{% endblock %}
