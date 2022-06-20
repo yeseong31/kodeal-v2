@@ -132,3 +132,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 # 로그아웃 시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
+
+# 이메일 발송 코드 Refactoring
+EMAIL_BACKEND = my_settings.EMAIL['EMAIL_BACKEND']
+EMAIL_USE_TLS = my_settings.EMAIL['EMAIL_USE_TLS']
+EMAIL_PORT = my_settings.EMAIL['EMAIL_PORT']
+EMAIL_HOST = my_settings.EMAIL['EMAIL_HOST']
+EMAIL_HOST_USER = my_settings.EMAIL['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = my_settings.EMAIL['EMAIL_HOST_PASSWORD']
+SERVER_EMAIL = my_settings.EMAIL['SERVER_EMAIL']

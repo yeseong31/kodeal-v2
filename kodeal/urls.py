@@ -18,5 +18,4 @@ urlpatterns = [
     # ----- question_views.py -----
     # 질문 등록
     path('question/create/', question_views.question_create, name='question_create'),
-
 ]
