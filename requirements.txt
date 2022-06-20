@@ -5,6 +5,8 @@ charset-normalizer==2.0.12
 colorama==0.4.5
 cryptography==37.0.2
 Django==4.0.4
+djangorestframework==3.13.1
+djangorestframework-jwt==1.11.0
 et-xmlfile==1.1.0
 idna==3.3
 Markdown==3.3.7
@@ -16,7 +18,7 @@ pandas==1.4.2
 pandas-stubs==1.2.0.61
 Pillow==9.1.1
 pycparser==2.21
-PyJWT==2.4.0
+PyJWT==1.7.1
 python-dateutil==2.8.2
 pytz==2022.1
 requests==2.28.0
