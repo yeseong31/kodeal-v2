@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'photo.apps.PhotoConfig',    # photo
     'pybo.apps.PyboConfig',    # pybo
     'common.apps.CommonConfig',    # common
+    'kodeal.apps.KodealConfig',    # common
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False  # False로 설정해야 DB에 한국 시간이 적용됨
 
 
 # Static files (CSS, JavaScript, Images)
