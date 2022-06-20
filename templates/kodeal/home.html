@@ -8,22 +8,24 @@
 <!-- BODY -->
 {% block content %}
 
-<h2>Kodeal Django TEST PAGE</h2>
-
-<!-- 'QnA' 버튼 -->
-<div class="col-6">
-    <div class="input-group">
-        <div class="qna input-group-append">
-            <a class="btn btn-sm btn-outline-secondary"
-               {% if not user.is_authenticated %}
-               onclick="showPopup();"
-               href="{% url 'common:signin' %}"
-               {% else %}
-               href="{% url 'kodeal:qna' %}"
-               {% endif %}>QnA</a>
+<div class="container">
+    <h3 class="my-3 border-bottom pb-2">Kodeal Back-end</h3>
+    <!-- 'QnA' 버튼 -->
+    <div class="col-6">
+        <div class="input-group">
+            <div class="qna input-group-append">
+                <a class="btn btn-sm btn-outline-secondary"
+                   {% if not user.is_authenticated %}
+                   onclick="showPopup();"
+                   href="{% url 'common:signin' %}"
+                   {% else %}
+                   href="{% url 'kodeal:qna' %}"
+                   {% endif %}>QnA</a>
+            </div>
         </div>
     </div>
 </div>
+
 
 {% endblock %}
 

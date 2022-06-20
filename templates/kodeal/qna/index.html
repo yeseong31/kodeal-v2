@@ -10,7 +10,7 @@
 {% block content %}
 
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">QnA 페이지</h5>
+    <h3 class="my-3 border-bottom pb-2">QnA 페이지</h3>
     <!-- 검색 창 -->
     <div class="row my-3">
         <!-- 질문 등록 버튼 -->
@@ -22,9 +22,9 @@
     <table class="table">
         <thead>
         <tr class="table-dark">
-            <th>#</th>
+            <th class="text-center">#</th>
             <th style="width:50%">Question</th>
-            <th>작성자</th>
+            <th class="text-center">작성자</th>
             <th>작성일</th>
         </tr>
         </thead>
@@ -33,7 +33,7 @@
             {% for question in question_list %}
             <tr>
                 <!-- 템플릿 필터 적용: 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
-                <td>
+                <td class="text-center">
                     {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}
                 </td>
                 <!-- Question -->
@@ -41,7 +41,7 @@
                     <a href="#">{{ question.content }}</a>
                 </td>
                 <!-- 작성자 -->
-                <td>{{ question.author.username }}</td>
+                <td class="text-center">{{ question.author.username }}</td>
                 <!-- 작성일 -->
                 <td>{{ question.create_date.date }} {{ question.create_date.time }}</td>
             </tr>
