@@ -11,7 +11,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from common.forms import UserForm
 from config.my_settings import EMAIL, JWT_SECRET_KEY
-from kodeal.tokens import message
+from common.tokens import message
 
 
 def signup(request):
@@ -63,7 +63,7 @@ def signup(request):
 
 def activate(request, uidb64, token):
     """
-    이메일 인증
+    이메일 인증 및 사용자 활성화
     """
     if request.method == 'POST':
         pass
