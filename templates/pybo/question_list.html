@@ -11,7 +11,7 @@
         </div>
         <!-- 질문 검색 버튼 -->
         <div class="col-6">
-            <input type="text" id="search_kw" class="form-control" value="{{ kw|default_is_none:'' }}">
+            <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" id="btn_search">검색</button>
             </div>
@@ -100,7 +100,7 @@
 <!-- page와 kw를 동시에 GET으로 요청하는 searchForm -->
 <form method="get" id="searchForm" action="{% url 'pybo:index' %}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw|default_is_none:'' }}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
 </form>
 
 {% endblock %}
