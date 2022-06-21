@@ -8,6 +8,8 @@ urlpatterns = [
     # ----- base_views.py -----
     # 메인 페이지
     path('', base_views.index, name='index'),
+    # 테스트 페이지
+    path('test/', base_views.test, name='test'),
 
     # ----- profile_views.py -----
     # 마이 페이지
