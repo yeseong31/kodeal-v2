@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'photo.apps.PhotoConfig',    # photo
     'pybo.apps.PyboConfig',    # pybo
     'common.apps.CommonConfig',    # common
-    'kodeal.apps.KodealConfig',    # common
+    'kodeal.apps.KodealConfig',    # kodeal
 ]
 
 MIDDLEWARE = [
@@ -141,3 +141,13 @@ EMAIL_HOST = my_settings.EMAIL['EMAIL_HOST']
 EMAIL_HOST_USER = my_settings.EMAIL['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = my_settings.EMAIL['EMAIL_HOST_PASSWORD']
 SERVER_EMAIL = my_settings.EMAIL['SERVER_EMAIL']
+
+# Amazon AWS
+AWS_ACCESS_KEY_ID = my_settings.AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = my_settings.AWS_SECRET_ACCESS_KEY
+AWS_REGION = my_settings.AWS_REGION
+# S3 Storages
+AWS_STORAGE_BUCKET_NAME = my_settings.AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = my_settings.AWS_S3_CUSTOM_DOMAIN
+AWS_S3_OBJECT_PARAMETERS = my_settings.AWS_S3_OBJECT_PARAMETERS
+DEFAULT_FILE_STORAGE = my_settings.DEFAULT_FILE_STORAGE
