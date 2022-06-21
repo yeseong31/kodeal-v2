@@ -2,12 +2,13 @@ import math
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
 from kodeal.forms import QuestionForm
-from kodeal.models import Answer, Keyword, Question
-from kodeal.views.api.codex import question_to_codex, extract_answer_sentences, get_answer_and_keyword
+from kodeal.models import Answer, Keyword, Question, Papago
+from kodeal.views.api.codex import get_answer_and_keyword
 from kodeal.views.api.papago import papago
 
 
@@ -17,6 +18,16 @@ def qna(request):
     Kodeal QnA Page
     """
     question_list = Question.objects.order_by('-create_date')
+
+    # 검색 처리
+    kw = request.GET.get('kw', '')
+    if kw:
+        question_list = question_list.filter(
+            Q(content__icontains=kw) |  # 질문 내용
+            Q(answer__content__icontains=kw) |  # 답변 내용
+            Q(author__username__icontains=kw) |  # 질문 등록자
+            Q(language__icontains=kw)  # 사용 언어
+        ).distinct()  # 중복 제거
 
     # 페이징 처리
     page = request.GET.get('page', '1')
@@ -50,18 +61,23 @@ def question_create(request):
             codex_question.author = request.user
             codex_question.create_date = timezone.now()
             codex_question.save()
-            # -------------------- 답변 처리 --------------------
+            # -------------------- Papago 처리 --------------------
             # 한글로 입력된 문장을 Papago API를 이용하여 번역
             translate_question = papago(content)
+            Papago(before_question=content,
+                   after_question=translate_question,
+                   question=codex_question,
+                   create_date=timezone.now()).save()
+
+            # -------------------- 답변 처리 --------------------
             # 번역 결과에 대해 OpenAI Codex의 결과 값을 get
             context = get_answer_and_keyword(translate_question, language)
             # DB에 OpenAI Codex로부터 얻은 답변 데이터 저장
             codex_answer = Answer(
                 content=context['answer'],
-                create_date=timezone.now(),
                 author=request.user,
-                question=codex_question
-            )
+                create_date=timezone.now(),
+                question=codex_question)
             codex_answer.save()
             # -------------------- 키워드 처리 --------------------
             for keyword in context['keywords']:
