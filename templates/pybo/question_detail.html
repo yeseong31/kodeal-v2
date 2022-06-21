@@ -78,7 +78,7 @@
                             class="recommend btn btn-sm btn-outline-secondary">추천
                     <span class="badge rounded-pill bg-success">{{ answer.voter.count }}</span>
                 </a>
-                {% if request.user == question.author %}
+                {% if request.user == answer.author %}
                 <!-- '수정' 버튼 -->
                 <a href="{% url 'pybo:answer_modify' answer.id %}"
                         class="btn btn-sm btn-outline-secondary">수정</a>
