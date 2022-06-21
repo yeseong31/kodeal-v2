@@ -16,6 +16,8 @@ urlpatterns = [
     # ----- question_views.py -----
     # QnA 페이지
     path('qna/', question_views.qna, name='qna'),
+    # 질문 조회
+    path('question/detail/<int:question_id>', question_views.question_detail, name='question_detail'),
     # 질문 등록
     path('question/create/', question_views.question_create, name='question_create'),
 ]

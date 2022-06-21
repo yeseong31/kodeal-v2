@@ -65,10 +65,9 @@ def remove_unnecessary_char(sentence):
         """
         첫 글자가 콜론(:)이라면 제거
         """
-        if answer[0] == ':':
+        if answer[0] in [':', '.']:
             return answer[2:]
-        else:
-            return answer
+        return answer
 
     def remove_two_newline_char(answer):
         """
