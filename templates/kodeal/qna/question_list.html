@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load kodeal_filter %}
 
 <!-- 타이틀 -->
@@ -16,6 +17,8 @@
         <!-- 질문 등록 버튼 -->
         <div class="col-6">
             <a href="{% url 'kodeal:question_create' %}" class="btn btn-primary">질문 등록</a>
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" data-bs-whatever="{{ request.user.username }}">모달창</button>
         </div>
         <!-- 질문 검색 버튼 -->
         <div class="col-6">
@@ -109,6 +112,45 @@
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
 </form>
 
+<!-- 모달창 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">사용자 ID</label>
+                        <input type="text" class="form-control" id="recipient-name" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Question:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                    <!-- 사용 언어 -->
+                    <label for="recipient-name" class="col-form-label">사용 언어</label><br>
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="btnradio1">C</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio2">Python 3</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio3">Javascript</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
@@ -135,4 +177,5 @@ btn_search.addEventListener('click', function() {
     document.getElementById('searchForm').submit();
 });
 </script>
+<script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
