@@ -32,7 +32,7 @@
             </div>
             <div class="my-3">
                 <!-- '추천' 버튼 -->
-                <a href="javascript:void(0)" data-uri="#"
+                <a href="javascript:void(0)" data-uri="{% url 'kodeal:question_vote' question.id  %}"
                             class="recommend btn btn-sm btn-outline-secondary">추천
                     <span class="badge rounded-pill bg-success">{{ question.voter.count }}</span>
                 </a>
@@ -53,7 +53,7 @@
             <div class="card-text">{{ answer.content|md }}</div>
             <div class="my-3">
                 <!-- '추천' 버튼 -->
-               <a href="javascript:void(0)" data-uri="#"
+                <a href="javascript:void(0)" data-uri="{% url 'kodeal:answer_vote' question.id  %}"
                             class="recommend btn btn-sm btn-outline-secondary">추천
                     <span class="badge rounded-pill bg-success">{{ answer.voter.count }}</span>
                 </a>
@@ -85,7 +85,7 @@
             </div>
             <div class="my-3">
                 <!-- '추천' 버튼 -->
-               <a href="javascript:void(0)" data-uri="#"
+                <a href="javascript:void(0)" data-uri="{% url 'kodeal:comment_vote' comment.id  %}"
                             class="recommend btn btn-sm btn-outline-secondary">추천
                     <span class="badge rounded-pill bg-success">{{ comment.voter.count }}</span>
                 </a>
@@ -133,6 +133,7 @@ const recommend_elements = document.getElementsByClassName("recommend");
 Array.from(recommend_elements).forEach(function(element) {
     element.addEventListener('click', function() {
         if(confirm("정말로 추천하시겠습니까?")) {
+            alert("해당 게시물을 추천했습니다.");
             location.href = this.dataset.uri;
         };
     });

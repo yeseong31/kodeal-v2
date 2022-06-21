@@ -1,5 +1,6 @@
 import math
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -98,4 +99,17 @@ def question_create(request):
         form = QuestionForm()
     context = {'form': form}
     return render(request, 'kodeal/qna/question_form.html', context)
+
+
+@login_required(login_url='common:signin')
+def question_vote(request, question_id):
+    """
+    Kodeal 질문 추천
+    """
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user == question.author:
+        messages.error(request, '본인이 작성한 글은 추천할 수 없습니다.')
+    else:
+        question.voter.add(request.user)
+    return redirect('kodeal:question_detail', question_id=question.id)
 
