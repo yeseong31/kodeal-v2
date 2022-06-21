@@ -26,7 +26,7 @@ def comment_create(request, question_id):
     else:
         return HttpResponseNotAllowed('Allow POST requests only.')
     context = {'question': question, 'form': form}
-    return render(request, 'kodeal/qna/comment_detail.html', context)
+    return render(request, 'kodeal/qna/question_detail.html', context)
 
 
 @login_required(login_url='common:signin')
