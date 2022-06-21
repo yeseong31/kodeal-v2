@@ -21,7 +21,7 @@ class Question(models.Model):
         return self.id
 
     class Meta:
-        db_table = 'kodeal_codex_question'
+        db_table = 'kodeal_question'
 
 
 class Answer(models.Model):
@@ -41,7 +41,7 @@ class Answer(models.Model):
         return self.id
 
     class Meta:
-        db_table = 'kodeal_codex_answer'
+        db_table = 'kodeal_answer'
 
 
 class Keyword(models.Model):
@@ -92,3 +92,23 @@ class Profile(models.Model):
 
     class Meta:
         db_table = 'kodeal_profile'
+
+
+class Comment(models.Model):
+    """
+    Kodeal Comment Model
+    """
+    id = models.AutoField(primary_key=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_q',
+                               verbose_name='코멘트 작성자')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='연관된 질문')
+    content = models.TextField(verbose_name='코멘트 내용')
+    create_date = models.DateTimeField(verbose_name='생성일')
+    modify_date = models.DateTimeField(null=True, blank=True, verbose_name='수정일')
+
+    def __str__(self):
+        return self.id
+
+    class Meta:
+        db_table = 'kodeal_comment'
+
