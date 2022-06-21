@@ -48,7 +48,7 @@
                 </td>
                 <!-- Question -->
                 <td>
-                    <a href="#">{{ question.content }}</a>
+                    <a href="{% url 'kodeal:question_detail' question.id %}">{{ question.content }}</a>
                 </td>
                 <!-- 작성자 -->
                 <td class="text-center">{{ question.author.username }}</td>

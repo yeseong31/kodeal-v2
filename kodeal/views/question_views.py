@@ -1,9 +1,10 @@
 import math
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 
 from kodeal.forms import QuestionForm
@@ -41,7 +42,18 @@ def qna(request):
     end = temp_end if total_page > temp_end else total_page
 
     context = {'question_list': page_obj, 'start': start, 'end': end, 'total_page': total_page, 'page': page}
-    return render(request, 'kodeal/qna/index.html', context)
+    return render(request, 'kodeal/qna/question_list.html', context)
+
+
+@login_required(login_url='common:signin')
+def question_detail(request, question_id):
+    """
+    해당 id를 가지는 질문 조회
+    """
+    # 해당 데이터가 존재하지 않는 경우 404 페이지 출력
+    question = get_object_or_404(Question, pk=question_id)
+    context = {'question': question}
+    return render(request, 'kodeal/qna/question_detail.html', context)
 
 
 @login_required(login_url='common:signin')
@@ -68,7 +80,6 @@ def question_create(request):
                    after_question=translate_question,
                    question=codex_question,
                    create_date=timezone.now()).save()
-
             # -------------------- 답변 처리 --------------------
             # 번역 결과에 대해 OpenAI Codex의 결과 값을 get
             context = get_answer_and_keyword(translate_question, language)
@@ -88,3 +99,4 @@ def question_create(request):
         form = QuestionForm()
     context = {'form': form}
     return render(request, 'kodeal/qna/question_form.html', context)
+
