@@ -103,13 +103,14 @@
     {% endfor %}
 
     <!-- 코멘트 등록 -->
-    <form action="{% url 'kodeal:comment_create' question.id %}" method="post" class="my-3">
-        {% csrf_token %} {% include 'form_errors.html' %}
+    <form id="frmcm" action="{% url 'kodeal:comment_create' question.id %}" method="post" class="my-3">
+        {% csrf_token %}
         <div class="form-group">
             <textarea name="content" id="content" class="form-control" rows="3"
                     {% if not user.is_authenticated %}disabled{% endif %}
-                    placeholder="코멘트를 남겨 주세요!"></textarea>
+                    placeholder="코멘트를 남겨 주세요!">{{ form.content.value|default_if_none:'' }}</textarea>
         </div><br>
+        {% include 'form_errors.html' %}
         <input type="submit" value="코멘트 등록" class="register btn btn-primary">
     </form>
 </div>
@@ -119,15 +120,6 @@
 <!-- Javascript -->
 {% block script %}
 <script type='text/javascript'>
-const register_elements = document.getElementsByClassName("register");
-Array.from(register_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("코멘트 등록이 완료되었습니다.")) {
-            location.href = this.dataset.uri;
-        };
-    });
-});
-
 const delete_elements = document.getElementsByClassName("delete");
 Array.from(delete_elements).forEach(function(element) {
     element.addEventListener('click', function() {
@@ -142,7 +134,7 @@ const recommend_elements = document.getElementsByClassName("recommend");
 Array.from(recommend_elements).forEach(function(element) {
     element.addEventListener('click', function() {
         if(confirm("해당 게시물을 추천하시겠습니까?")) {
-            alert("추천이 완료되었습니다.");
+            // alert("추천이 완료되었습니다.");
             location.href = this.dataset.uri;
         };
     });
