@@ -48,7 +48,6 @@
     <!-- 답변 -->
     <h3 class="border-bottom my-3 py-2">Codex의 답변</h3>
     {% for answer in question.answer_set.all %}
-    <a id="answer_{{ answer.id }}"></a>
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text">{{ answer.content|md }}</div>
@@ -63,17 +62,55 @@
     </div><br>
     {% endfor %}
     <!-- 코멘트 등록 -->
-    <form action="#" method="post" class="my-3">
+    <h5 class="border-bottom my-3 py-2">{{ question.comment_set.count }}개의 코멘트가 있습니다.</h5>
+    {% for comment in question.comment_set.all %}
+    <a id="comment_{{ comment.id }}"></a>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text">{{ comment.content|md }}</div>
+            <div class="d-flex justify-content-end">
+                <!-- 수정일 -->
+                {% if comment.modify_date %}
+                <div class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div>{{ comment.modify_date }}</div>
+                </div>
+                {% endif %}
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <!-- 글쓴이 -->
+                    <div class="mb-2">{{ comment.author.username }}</div>
+                    <!-- 작성일 -->
+                    <div>{{ comment.create_date }}</div>
+                </div>
+            </div>
+            <div class="my-3">
+                <!-- '추천' 버튼 -->
+               <a href="javascript:void(0)" data-uri="#"
+                            class="recommend btn btn-sm btn-outline-secondary">추천
+                    <span class="badge rounded-pill bg-success">{{ comment.voter.count }}</span>
+                </a>
+                {% if request.user == comment.author %}
+                <!-- '수정' 버튼 -->
+                <a href="#"
+                        class="btn btn-sm btn-outline-secondary">수정</a>
+                <!-- '삭제' 버튼 -->
+                <a href="#" class="delete btn btn-sm btn-outline-secondary"
+                        data-uri="#">삭제</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- 코멘트 등록 -->
+    <form action="{% url 'kodeal:comment_create' question.id %}" method="post" class="my-3">
         {% csrf_token %} {% include 'form_errors.html' %}
         <div class="form-group">
-            <textarea name="content" id="content" class="form-control" rows="10"
-                    {% if not user.is_authenticated %}disabled{% endif %}></textarea>
+            <textarea name="content" id="content" class="form-control" rows="3"
+                    {% if not user.is_authenticated %}disabled{% endif %}
+                    placeholder="코멘트를 남겨 주세요!"></textarea>
         </div><br>
         <input type="submit" value="코멘트 등록" class="btn btn-primary">
-        <a class="btn btn-outline-secondary"
-               {% if not user.is_authenticated %} onclick="showPopup();" href="{% url 'common:signin' %}"
-               {% else %} href="{% url 'kodeal:qna' %}"
-               {% endif %}>QnA</a>
     </form>
 </div>
 

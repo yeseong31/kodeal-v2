@@ -1,6 +1,6 @@
 from django import forms
 
-from kodeal.models import Question
+from kodeal.models import Question, Comment
 
 
 class QuestionForm(forms.ModelForm):
@@ -19,3 +19,16 @@ class QuestionForm(forms.ModelForm):
             "content": '질문',
             'language': '언어',
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        # 사용할 모델
+        model = Comment
+        # Form에서 사용할 Question 모델의 속성
+        fields = ['content']
+        # Form Label 편집
+        labels = {
+            "content": '코멘트 내용',
+        }
+

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from kodeal.views import base_views, profile_views, question_views
+from kodeal.views import base_views, profile_views, question_views, comment_views
 
 app_name = 'kodeal'
 
@@ -19,7 +19,12 @@ urlpatterns = [
     # QnA 페이지
     path('qna/', question_views.qna, name='qna'),
     # 질문 조회
-    path('question/detail/<int:question_id>', question_views.question_detail, name='question_detail'),
+    path('question/detail/<int:question_id>/', question_views.question_detail, name='question_detail'),
     # 질문 등록
     path('question/create/', question_views.question_create, name='question_create'),
+
+    # ----- comment_views.py -----
+    # 코멘트 등록
+    path('comment/create/<int:question_id>/', comment_views.comment_create, name='comment_create'),
+
 ]
