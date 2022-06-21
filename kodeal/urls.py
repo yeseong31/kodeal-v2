@@ -24,6 +24,8 @@ urlpatterns = [
     path('question/detail/<int:question_id>/', question_views.question_detail, name='question_detail'),
     # 질문 등록
     path('question/create/', question_views.question_create, name='question_create'),
+    # 질문 삭제
+    path('question/delete/<int:question_id>/', question_views.question_delete, name='question_delete'),
     # 질문 추천
     path('question/vote/<int:question_id>/', question_views.question_vote, name='question_vote'),
 
@@ -34,6 +36,8 @@ urlpatterns = [
     # ----- comment_views.py -----
     # 코멘트 등록
     path('comment/create/<int:question_id>/', comment_views.comment_create, name='comment_create'),
+    # 코멘트 삭제
+    path('comment/delete/<int:comment_id>/', comment_views.comment_delete, name='comment_delete'),
     # 코멘트 추천
     path('comment/vote/<int:comment_id>/', comment_views.comment_vote, name='comment_vote'),
 

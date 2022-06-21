@@ -113,3 +113,17 @@ def question_vote(request, question_id):
         question.voter.add(request.user)
     return redirect('kodeal:question_detail', question_id=question.id)
 
+
+@login_required(login_url='common:signin')
+def question_delete(request, question_id):
+    """
+    Kodeal 질문 삭제
+    """
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user.is_staff or request.user == question.author:
+        question.delete()
+        return redirect('kodeal:qna')
+    else:
+        messages.error(request, '질문 삭제 권한이 없습니다.')    # messages: Django 모듈(넌필드 오류 발생 시 사용)
+        return redirect('kodeal:question_detail', question_id=question_id)
+
