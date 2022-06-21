@@ -66,7 +66,8 @@ class Papago(models.Model):
     """
     id = models.AutoField(primary_key=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='연관된 질문')
-    content = models.TextField(verbose_name='번역 결과')
+    before_question = models.TextField(verbose_name='번역 전')
+    after_question = models.TextField(verbose_name='번역 전')
     create_date = models.DateTimeField(verbose_name='생성일')
     modify_date = models.DateTimeField(null=True, blank=True, verbose_name='수정일')
 
