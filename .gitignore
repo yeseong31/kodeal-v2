@@ -214,4 +214,8 @@ ENV/
 # Django_REST Project
 my_settings.py
 
+# SECRET
+SECRET/**/*.pem
+SECRET/**/*.ppk
+
 # End of https://www.gitignore.io/api/macos,linux,django,python,pycharm
