@@ -91,7 +91,7 @@
                 </a>
                 {% if request.user == comment.author or request.user.is_staff %}
                 <!-- '수정' 버튼 -->
-                <a href="#"
+                <a href="{% url 'kodeal:comment_modify' comment.id %}"
                         class="btn btn-sm btn-outline-secondary">수정</a>
                 <!-- '삭제' 버튼 -->
                 <a href="#" class="delete btn btn-sm btn-outline-secondary"
@@ -112,6 +112,7 @@
         </div><br>
         {% include 'form_errors.html' %}
         <input type="submit" value="코멘트 등록" class="register btn btn-primary">
+        <a href="{% url 'kodeal:qna' %}" class="btn btn-outline-secondary">목록</a>
     </form>
 </div>
 

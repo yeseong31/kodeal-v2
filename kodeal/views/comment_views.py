@@ -43,6 +43,28 @@ def comment_vote(request, comment_id):
 
 
 @login_required(login_url='common:signin')
+def comment_modify(request, comment_id):
+    """
+    Kodeal 코멘트 수정
+    """
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user != comment.author:
+        messages.error(request, '코멘트 수정 권한이 없습니다.')
+        return redirect(f'{resolve_url("kodeal:question_detail", question_id=comment.question.id)}#comment_{comment.id}')
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.modify_date = timezone.now()
+            comment.save()
+            return redirect(f'{resolve_url("kodeal:question_detail", question_id=comment.question.id)}#comment_{comment.id}')
+    else:
+        form = CommentForm(instance=comment)
+    context = {'comment': comment, 'form': form}
+    return render(request, 'kodeal/qna/comment_form.html', context)
+
+
+@login_required(login_url='common:signin')
 def comment_delete(request, comment_id):
     """
     Kodeal 코멘트 삭제

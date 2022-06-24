@@ -36,6 +36,8 @@ urlpatterns = [
     # ----- comment_views.py -----
     # 코멘트 등록
     path('comment/create/<int:question_id>/', comment_views.comment_create, name='comment_create'),
+    # 코멘트 수정
+    path('comment/modify/<int:comment_id>/', comment_views.comment_modify, name='comment_modify'),
     # 코멘트 삭제
     path('comment/delete/<int:comment_id>/', comment_views.comment_delete, name='comment_delete'),
     # 코멘트 추천
