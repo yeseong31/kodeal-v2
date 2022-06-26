@@ -2,7 +2,7 @@ import json
 import ssl
 import urllib
 
-from config.my_settings import CLIENT_ID, CLIENT_SECRET
+from config.settings.my_settings import CLIENT_ID, CLIENT_SECRET
 
 
 def papago(text):

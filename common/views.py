@@ -10,7 +10,7 @@ from django.utils.encoding import force_str, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from common.forms import UserForm
-from config.my_settings import EMAIL, JWT_SECRET_KEY
+from config.settings.my_settings import EMAIL, JWT_SECRET_KEY
 
 
 def signup(request):

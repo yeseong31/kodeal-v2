@@ -2,7 +2,7 @@ import json
 
 import openai
 
-from config import my_settings
+from config.settings import my_settings
 
 openai.api_key = my_settings.OPENAI_CODEX_KEY
 openai.Engine.list()
