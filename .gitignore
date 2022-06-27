@@ -213,6 +213,7 @@ ENV/
 
 # Django_REST Project
 my_settings.py
+.static_root/
 
 # SECRET
 SECRET/**/*.pem
