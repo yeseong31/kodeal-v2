@@ -22,3 +22,5 @@ urlpatterns = [
     path('common/', include('common.urls')),
     path('', include('kodeal.urls')),
 ]
+
+handler404 = 'common.views.page_not_found'

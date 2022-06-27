@@ -91,3 +91,7 @@ def message(domain, uidb64, token):
     return f"아래 링크를 클릭하면 회원가입 인증이 완료됩니다.\n\n" \
            f"회원가입 링크 : http://{domain}/common/activate/{uidb64}/{token}\n\n" \
            f"감사합니다."
+
+
+def page_not_found(request, exception):
+    return render(request, 'common/404.html', {})
