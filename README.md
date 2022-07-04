@@ -1,4 +1,4 @@
-# Make Your NFT Django
+# Kodeal
 
 ## 🛠️ Language & Tools  🛠️
 ![Python: Version](https://img.shields.io/badge/Python-3.10.4-3776AB.svg?logo=Python&logoColor=white)
@@ -32,7 +32,7 @@
   (kodeal)$ pip install -r requirements.txt
   ```
 
-  - 이때 프롬프트 창의 `(myn)` 표시는 `python -m venv` 명령어를 통해 생성된 myn이라는 이름의 가상 환경에 진입한 상태를 의미합니다. 
+  - 이때 프롬프트 창의 `(kodeal)` 표시는 `python -m venv` 명령어를 통해 생성된 kodeal이라는 이름의 가상 환경에 진입한 상태를 의미합니다. 
   
 <br>
 
@@ -87,7 +87,7 @@
       'EMAIL_HOST': 'smtp.gmail.com',
       'EMAIL_HOST_USER': EMAIL_HOST_USER,
       'EMAIL_HOST_PASSWORD': EMAIL_HOST_PASSWORD,
-      'SERVER_EMAIL': 'MYN',
+      'SERVER_EMAIL': 'KODEAL',
       'REDIRECT_PAGE': 'http://127.0.0.1:8000/'
   }
   
