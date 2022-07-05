@@ -9,7 +9,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.serializers import RegisterSerializer, SigninSerializer
+from common.serializers import RegisterSerializer, SigninSerializer
 from common.tokens import account_activation_token
 
 
@@ -67,20 +67,15 @@ class SignupView(APIView):
     """회원가입"""
 
     def post(self, request):
-        username = request.data['username']
-        password = request.data['password']
-        password2 = request.data['password2']
-        email = request.data['email']
-
-        user = get_object_or_404(User, username=username)
+        user = get_object_or_404(User, username=request.data['username'])
         if not user.is_active:
             return Response({'message': '이메일 인증 링크를 통해 인증을 완료해 주세요.'}, status=status.HTTP_400_BAD_REQUEST)
-        if password != password2:
+        if request.data['password'] != request.data['password2']:
             return Response({'message': '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
-        if user.email != email:
+        if user.email != request.data['email']:
             return Response({'message': '인증을 완료한 이메일과 다른 이메일입니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        user.set_password(password)
+        user.set_password(request.data['password'])
         user.save()
         Token.objects.create(user=user)  # 해당 계정에 대한 Token 발행
         return Response({'message': '회원가입이 완료되었습니다.'}, status=status.HTTP_200_OK)
