@@ -24,12 +24,6 @@
                     <a class="nav-link" href="{% url 'common:signin' %}">로그인</a>
                 {% endif %}
                 </li>
-                <!-- '회원가입' 버튼 -->
-                <li>
-                {% if not user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
-                {% endif %}
-                </li>
                 <!-- 'QnA' 버튼 -->
                 <li>
                 {% if user.is_authenticated %}
