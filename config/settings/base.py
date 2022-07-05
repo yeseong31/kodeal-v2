@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'pybo.apps.PyboConfig',    # pybo
     'common.apps.CommonConfig',    # common
     'kodeal.apps.KodealConfig',    # kodeal
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
