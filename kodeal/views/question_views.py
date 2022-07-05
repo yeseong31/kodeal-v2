@@ -9,8 +9,8 @@ from django.utils import timezone
 
 from kodeal.forms import QuestionForm
 from kodeal.models import Answer, Keyword, Question, Papago
-from kodeal.views.api.codex import get_answer_and_keyword
-from kodeal.views.api.papago import papago
+from kodeal.codex import get_answer_and_keyword
+from kodeal.papago import papago
 
 
 @login_required(login_url='common:signin')

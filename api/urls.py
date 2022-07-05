@@ -1,12 +1,12 @@
 from django.urls import path
 
-from api.views import CheckIDView, CheckEmailView, UserActivateView, SignupView, SigninView
+from api.views.auth import CheckIDView, CheckEmailView, UserActivateView, SignupView, SigninView
 
 app_name = 'api'
 
 urlpatterns = [
     # ----- Authentication -----
-    # 회원가입
+    # 회원 가입
     path('signup/', SignupView.as_view()),
     # 로그인
     path('signin/', SigninView.as_view()),
