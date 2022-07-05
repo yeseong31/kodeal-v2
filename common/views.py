@@ -10,6 +10,7 @@ from django.utils.encoding import force_str, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from common.forms import UserForm
+from common.messages import message
 from config.settings.my_settings import EMAIL, JWT_SECRET_KEY
 
 
@@ -42,7 +43,7 @@ def signup(request):
                 # 입력한 사용자 ID에 대한 암호화
                 uidb64 = urlsafe_base64_encode(force_bytes(userid))
                 token = jwt.encode({'userid': userid}, JWT_SECRET_KEY, algorithm='HS256').decode('UTF-8')
-                message_data = message(domain, uidb64, token)
+                message_data = message(domain, uidb64, token, 'common')
 
                 # 이메일 메시지 구성
                 mail_title = "Kodeal: 이메일 인증을 완료해 주세요."
@@ -82,15 +83,6 @@ def activate(request, uidb64, token):
             return JsonResponse({"message": "TYPE_ERROR"}, status=400)
         except KeyError:
             return JsonResponse({"message": "INVALID_KEY"}, status=400)
-
-
-def message(domain, uidb64, token):
-    """
-    Active를 담당하는 Endpoint URL 주소를 메시지로 Send
-    """
-    return f"아래 링크를 클릭하면 회원가입 인증이 완료됩니다.\n\n" \
-           f"회원가입 링크 : http://{domain}/common/activate/{uidb64}/{token}\n\n" \
-           f"감사합니다."
 
 
 def page_not_found(request, exception):
