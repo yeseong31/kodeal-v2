@@ -131,11 +131,11 @@
                         <textarea class="form-control" name="content" id="content"
                                   placeholder="Please enter your question.">{{ form.content.value|default_if_none:'' }}</textarea>
                     </div>
-                    <input type="text" class="form-control" name="language" id="language"
-                           value="{{ form.language.value|default_if_none:'' }}" hidden>
+                    <label><input type="text" class="form-control" name="language" id="language"
+                                  value="{{ form.language.value|default_if_none:'' }}" hidden></label>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
-                               value="C" autocomplete="off" onclick='setLanguage("C")'>
+                               value="C" autocomplete="off" onclick='setLanguage("C")' checked>
                         <label class="btn btn-outline-primary" for="btnradio1">C</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
                                value="Python 3" autocomplete="off" onclick='setLanguage("Python 3")'>
