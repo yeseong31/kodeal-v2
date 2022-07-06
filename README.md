@@ -2,7 +2,7 @@
 
 ## 🛠️ Language & Tools  🛠️
 ![Python: Version](https://img.shields.io/badge/Python-3.10.4-3776AB.svg?logo=Python&logoColor=white)
-![Django: Version](https://img.shields.io/badge/Django-4.0.4-092E20.svg?logo=Django&logoColor=white)
+![Django: Version](https://img.shields.io/badge/Django-4.0.6-092E20.svg?logo=Django&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-003545.svg?logo=MariaDB&logoColor=white)
 ![OpenAI Codex](https://img.shields.io/badge/OpenAI-000000.svg?logo=OpenAI&logoColor=white)
 <!--![Travis CI](https://img.shields.io/badge/TravisCI-3EAAAF.svg?logo=travis-ci&logoColor=white)-->
