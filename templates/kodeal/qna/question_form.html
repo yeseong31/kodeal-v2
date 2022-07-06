@@ -7,14 +7,25 @@
         {% csrf_token %}
         <!-- Form 메인 -->
         <div class="mb-3">
-            <label for="content" class="form-label">질문</label>
+            <label for="content" class="form-label">Question:</label>
             <textarea class="form-control" name="content"
-                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+                      id="content">{{ form.content.value|default_if_none:'' }}</textarea>
         </div>
         <div class="mb-3">
-            <label for="language" class="form-label">언어</label>
+            <label for="language" class="form-label">언어</label><br>
             <input type="text" class="form-control" name="language" id="language"
-                   value="{{ form.language.value|default_if_none:'' }}">
+                   value="{{ form.language.value|default_if_none:'' }}" hidden>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
+                       value="C" autocomplete="off" onclick='setLanguage("C")' checked>
+                <label class="btn btn-outline-primary" for="btnradio1">C</label>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
+                       value="Python 3" autocomplete="off" onclick='setLanguage("Python 3")'>
+                <label class="btn btn-outline-primary" for="btnradio2">Python 3</label>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3"
+                       value="Javascript" autocomplete="off" onclick='setLanguage("Javascript")'>
+                <label class="btn btn-outline-primary" for="btnradio3">Javascript</label>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">등록</button>
     </form>
@@ -22,4 +33,13 @@
     {% include 'form_errors.html' %}
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+// Radio 선택: language 값 가져오기
+function setLanguage(lan) {
+    document.getElementById('language').value = lan;
+}
+</script>
 {% endblock %}

@@ -11,7 +11,7 @@ class QuestionForm(forms.ModelForm):
         fields = ['content', 'language']
         # Form에 Bootstrap 적용
         widgets = {
-            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
+            'content': forms.Textarea(attrs={'class': 'form-control'}),
             'language': forms.TextInput(attrs={'class': 'form-control'})
         }
         # Form Label 편집
