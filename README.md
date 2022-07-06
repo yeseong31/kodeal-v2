@@ -1,10 +1,11 @@
 # Kodeal
 
 ## 🛠️ Language & Tools  🛠️
-![Python: Version](https://img.shields.io/badge/Python-3.10.4-3776AB.svg?logo=Python&logoColor=white)
+![Python: Version](https://img.shields.io/badge/Python-3.10.5-3776AB.svg?logo=Python&logoColor=white)
 ![Django: Version](https://img.shields.io/badge/Django-4.0.6-092E20.svg?logo=Django&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-003545.svg?logo=MariaDB&logoColor=white)
 ![OpenAI Codex](https://img.shields.io/badge/OpenAI-000000.svg?logo=OpenAI&logoColor=white)
+![Heroku](https://img.shields.io/badge/Heroku-430098.svg?logo=Heroku&logoColor=white)
 <!--![Travis CI](https://img.shields.io/badge/TravisCI-3EAAAF.svg?logo=travis-ci&logoColor=white)-->
 
 ## 🔧 Setup 🔧
@@ -54,7 +55,7 @@
   # ----- Naver Papago -----
   CLIENT_ID =                 # Papago API Client ID
   CLIENT_SECRET =        # Papago API Client Secret Key
-  # Amazon S3
+  # ----- Amazon S3 -----
   AWS_ACCESS_KEY_ID =                # S3Access key ID
   AWS_SECRET_ACCESS_KEY =       # S3 Secret access key
   AWS_S3_BUCKET_LINK =             # S3 버킷 링크
