@@ -1,3 +1,5 @@
+import os
+
 import jwt
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
@@ -11,7 +13,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from common.forms import UserForm
 from common.messages import message
-from config.settings.my_settings import JWT_SECRET_KEY
+from common.tokens import get_jwt_token
+from config.settings.base import JWT_SECRET_KEY
 
 
 def signup(request):
@@ -42,7 +45,8 @@ def signup(request):
                 domain = current_site.domain
                 # 입력한 사용자 ID에 대한 암호화
                 uidb64 = urlsafe_base64_encode(force_bytes(userid))
-                token = jwt.encode({'userid': userid}, JWT_SECRET_KEY, algorithm='HS256').decode('UTF-8')
+
+                token = jwt.encode({'userid': userid}, get_jwt_token(), algorithm='HS256').decode('UTF-8')
                 message_data = message(domain, uidb64, token, 'common')
 
                 # 이메일 메시지 구성
@@ -72,7 +76,7 @@ def activate(request, uidb64, token):
     elif request.method == 'GET':
         try:
             user = User.objects.get(username=force_str(urlsafe_base64_decode(uidb64)))
-            token = jwt.decode(token, JWT_SECRET_KEY, algorithm='HS256')
+            token = jwt.decode(token, get_jwt_token(), algorithm='HS256')
 
             # 전달된 두 값이 일치한다면 사용자의 '활성' 상태를 1로 set
             if user.username == token['userid']:
