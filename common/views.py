@@ -50,7 +50,7 @@ def signup(request):
                 EmailMessage(mail_title, message_data, to=[email]).send()
 
                 alert_message = '회원가입 성공! 이메일 인증 링크를 확인해 주세요.'
-                return render(request, 'common/complete.html', {'message': alert_message, 'url': '/'})
+                return render(request, 'complete.html', {'message': alert_message, 'url': '/'})
 
             except KeyError:
                 return JsonResponse({"message": "INVALID_KEY"}, status=400)
@@ -79,7 +79,7 @@ def activate(request, uidb64, token):
                 user.is_active = True
                 user.save()
                 alert_message = '이메일 인증 성공! 해당 계정으로 로그인 해주세요.'
-                return render(request, 'common/complete.html', {'message': alert_message, 'url': '/common/signin/'})
+                return render(request, 'complete.html', {'message': alert_message, 'url': '/common/signin/'})
             return JsonResponse({"message": "AUTH FAIL"}, status=400)
 
         except ValidationError:
