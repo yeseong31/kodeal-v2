@@ -106,9 +106,10 @@
     <form id="frmcm" action="{% url 'kodeal:comment_create' question.id %}" method="post" class="my-3">
         {% csrf_token %}
         <div class="form-group">
+            <label for="content"></label>
             <textarea name="content" id="content" class="form-control" rows="3"
-                    {% if not user.is_authenticated %}disabled{% endif %}
-                    placeholder="코멘트를 남겨 주세요!">{{ form.content.value|default_if_none:'' }}</textarea>
+                       {% if not user.is_authenticated %}disabled{% endif %}
+                       placeholder="코멘트를 남겨 주세요!">{{ form.content.value|default_if_none:'' }}</textarea>
         </div><br>
         {% include 'form_errors.html' %}
         <input type="submit" value="코멘트 등록" class="register btn btn-primary">
@@ -127,7 +128,7 @@ Array.from(delete_elements).forEach(function(element) {
         if(confirm("정말로 삭제하시겠습니까?")) {
             alert("삭제가 완료되었습니다.");
             location.href = this.dataset.uri;
-        };
+        }
     });
 });
 
@@ -137,7 +138,7 @@ Array.from(recommend_elements).forEach(function(element) {
         if(confirm("해당 게시물을 추천하시겠습니까?")) {
             // alert("추천이 완료되었습니다.");
             location.href = this.dataset.uri;
-        };
+        }
     });
 });
 </script>
