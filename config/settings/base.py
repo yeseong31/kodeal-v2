@@ -10,25 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-from pathlib import Path
 
-from config.settings import my_settings
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = my_settings.SECRET_KEY
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -69,7 +59,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,13 +73,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = my_settings.DATABASES
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -126,7 +109,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = False  # False로 설정해야 DB에 한국 시간이 적용됨
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -134,7 +117,7 @@ USE_TZ = False  # False로 설정해야 DB에 한국 시간이 적용됨
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR / 'static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, '.static_root')
 
@@ -148,21 +131,6 @@ LOGIN_REDIRECT_URL = '/'
 # 로그아웃 시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
 
-# 이메일 발송 코드 Refactoring
-EMAIL_BACKEND = my_settings.EMAIL['EMAIL_BACKEND']
-EMAIL_USE_TLS = my_settings.EMAIL['EMAIL_USE_TLS']
-EMAIL_PORT = my_settings.EMAIL['EMAIL_PORT']
-EMAIL_HOST = my_settings.EMAIL['EMAIL_HOST']
-EMAIL_HOST_USER = my_settings.EMAIL['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = my_settings.EMAIL['EMAIL_HOST_PASSWORD']
-SERVER_EMAIL = my_settings.EMAIL['SERVER_EMAIL']
 
-# Amazon AWS
-AWS_ACCESS_KEY_ID = my_settings.AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY = my_settings.AWS_SECRET_ACCESS_KEY
-AWS_REGION = my_settings.AWS_REGION
-# S3 Storages
-AWS_STORAGE_BUCKET_NAME = my_settings.AWS_STORAGE_BUCKET_NAME
-AWS_S3_CUSTOM_DOMAIN = my_settings.AWS_S3_CUSTOM_DOMAIN
-AWS_S3_OBJECT_PARAMETERS = my_settings.AWS_S3_OBJECT_PARAMETERS
-DEFAULT_FILE_STORAGE = my_settings.DEFAULT_FILE_STORAGE
+# Generate JWT Token
+JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
