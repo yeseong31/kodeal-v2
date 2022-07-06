@@ -5,13 +5,13 @@ from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.core.validators import validate_email
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.utils.encoding import force_str, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from common.forms import UserForm
 from common.messages import message
-from config.settings.my_settings import EMAIL, JWT_SECRET_KEY
+from config.settings.my_settings import JWT_SECRET_KEY
 
 
 def signup(request):
@@ -49,7 +49,9 @@ def signup(request):
                 mail_title = "Kodeal: 이메일 인증을 완료해 주세요."
                 EmailMessage(mail_title, message_data, to=[email]).send()
 
-                return redirect('kodeal:index')
+                alert_message = '회원가입 성공! 이메일 인증 링크를 확인해 주세요.'
+                return render(request, 'common/complete.html', {'message': alert_message, 'url': '/'})
+
             except KeyError:
                 return JsonResponse({"message": "INVALID_KEY"}, status=400)
             except TypeError:
@@ -76,7 +78,8 @@ def activate(request, uidb64, token):
             if user.username == token['userid']:
                 user.is_active = True
                 user.save()
-                return redirect(EMAIL['REDIRECT_PAGE'])
+                alert_message = '이메일 인증 성공! 해당 계정으로 로그인 해주세요.'
+                return render(request, 'common/complete.html', {'message': alert_message, 'url': '/common/signin/'})
             return JsonResponse({"message": "AUTH FAIL"}, status=400)
 
         except ValidationError:
