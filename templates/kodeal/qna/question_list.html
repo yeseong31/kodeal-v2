@@ -106,7 +106,7 @@
     </ul>
 </div>
 
-<!-- page와 kw를 동시에 GET으로 요청하는 searchForm -->
+<!-- page, kw를 요청하는 searchForm -->
 <form method="get" id="searchForm" action="{% url 'kodeal:qna' %}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
@@ -152,7 +152,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btn-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" id="btn-submit" class="btn btn-primary" onclick="toggleBtn()">Send</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary">Send</button>
                 </div>
             </form>
             <br>
@@ -198,6 +198,7 @@ btn_submit.addEventListener("click", function (e) {
     this.setAttribute("disabled", "disabled");
     if (toggle.hidden) {
         toggle.hidden = false;
+        // 폼 전송 및 이중 폼 전송 방지
         this.form.submit();
         btn_close.disabled = true;
     }

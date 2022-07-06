@@ -26,8 +26,10 @@
                        value="Javascript" autocomplete="off" onclick='setLanguage("Javascript")'>
                 <label class="btn btn-outline-primary" for="btnradio3">Javascript</label>
             </div>
+            <label for="loading" id="toggle" class="form-label"
+                       style="color: darkgrey;" hidden>　질문을 등록 중입니다...</label>
         </div>
-        <button type="submit" class="btn btn-primary">등록</button>
+        <button type="submit" id="btn-submit" class="btn btn-primary">Send</button>
     </form>
     <br>
     {% include 'form_errors.html' %}
@@ -41,5 +43,17 @@
 function setLanguage(lan) {
     document.getElementById('language').value = lan;
 }
+// 질문 등록 시 Loading 문구 나타내기
+const btn_submit = document.getElementById('btn-submit');
+const toggle = document.getElementById('toggle');
+btn_submit.addEventListener("click", function (e) {
+    this.setAttribute("disabled", "disabled");
+    if (toggle.hidden) {
+        toggle.hidden = false;
+        // 폼 전송 및 이중 폼 전송 방지
+        this.form.submit();
+        btn_submit.disabled = true;
+    }
+});
 </script>
 {% endblock %}
