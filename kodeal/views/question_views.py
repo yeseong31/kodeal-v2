@@ -94,7 +94,9 @@ def question_create(request):
             for keyword in context['keywords']:
                 Keyword(content=keyword, author=request.user, question=codex_question).save()
 
-            return redirect('kodeal:qna')
+            alert_message = '질문 등록 완료! 목록을 확인해 주세요.'
+            return render(request, 'complete.html', {'message': alert_message,
+                                                     'url': f'/question/detail/{codex_question.pk}/'})
     else:
         form = QuestionForm()
     context = {'form': form}

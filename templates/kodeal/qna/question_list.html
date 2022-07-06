@@ -17,15 +17,16 @@
         <!-- 질문 등록 버튼 -->
         <div class="col-6">
             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal" data-bs-whatever="{{ request.user.username }}">질문 등록</button>
+                    data-bs-target="#staticBackdrop" data-bs-whatever="{{ request.user.username }}">질문 등록</button>
         </div>
         <!-- 질문 검색 버튼 -->
         <div class="col-6">
             <div class="input-group">
+                <label for="search_kw"></label>
                 <input type="text" id="search_kw" class="form-control"
                        value="{{ kw|default_if_none:'' }}" placeholder="검색어를 입력해 주세요">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">검색</button>
+                    <button class="btn btn-outline-secondary" type="button" id="btn-search">검색</button>
                 </div>
             </div>
         </div>
@@ -112,7 +113,8 @@
 </form>
 
 <!-- 모달창 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form method="post" id="modalForm" action="{% url 'kodeal:question_create' %}">
@@ -123,7 +125,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">사용자 ID</label>
+                        <label for="recipient-name" class="col-form-label">User ID</label>
                         <input type="text" class="form-control" id="recipient-name" disabled>
                     </div>
                     <div class="mb-3">
@@ -131,8 +133,9 @@
                         <textarea class="form-control" name="content" id="content"
                                   placeholder="Please enter your question.">{{ form.content.value|default_if_none:'' }}</textarea>
                     </div>
-                    <label><input type="text" class="form-control" name="language" id="language"
-                                  value="{{ form.language.value|default_if_none:'' }}" hidden></label>
+                    <label for="language"></label>
+                    <input type="text" class="form-control" name="language" id="language"
+                           value="{{ form.language.value|default_if_none:'' }}" hidden>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
                                value="C" autocomplete="off" onclick='setLanguage("C")'>
@@ -144,10 +147,12 @@
                                value="Javascript" autocomplete="off" onclick='setLanguage("Javascript")'>
                         <label class="btn btn-outline-primary" for="btnradio3">Javascript</label>
                     </div>
+                    <label for="loading" id="toggle" class="form-label"
+                               style="color: darkgrey;" hidden>　질문을 등록 중입니다...</label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="button" id="btn-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary" onclick="toggleBtn()">Send</button>
                 </div>
             </form>
             <br>
@@ -174,7 +179,7 @@ Array.from(page_elements).forEach(function(element) {
     });
 });
 
-const btn_search = document.getElementById("btn_search");
+const btn_search = document.getElementById("btn-search");
 btn_search.addEventListener('click', function() {
     document.getElementById('kw').value = document.getElementById('search_kw').value;
     document.getElementById('page').value = 1;    // 검색 버튼 클릭 시 1페이지부터 조회
@@ -185,6 +190,18 @@ btn_search.addEventListener('click', function() {
 function setLanguage(lan) {
     document.getElementById('language').value = lan;
 }
+// 질문 등록 시 Loading 문구 나타내기
+const btn_submit = document.getElementById('btn-submit');
+const btn_close = document.getElementById('btn-close');
+const toggle = document.getElementById('toggle');
+btn_submit.addEventListener("click", function (e) {
+    this.setAttribute("disabled", "disabled");
+    if (toggle.hidden) {
+        toggle.hidden = false;
+        this.form.submit();
+        btn_close.disabled = true;
+    }
+});
 </script>
 <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}

@@ -1,4 +1,4 @@
-var exampleModal = document.getElementById('exampleModal')
+var exampleModal = document.getElementById('staticBackdrop')
 exampleModal.addEventListener('show.bs.modal', function (event) {
   // Button that triggered the modal
   var button = event.relatedTarget
