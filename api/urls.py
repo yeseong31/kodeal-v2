@@ -1,8 +1,13 @@
 from django.urls import path
+from rest_framework import routers
 
 from api.views.auth_view import CheckIDView, CheckEmailView, UserActivateView, SignupView, SigninView
+from api.views.qna_view import QuestionViewSet
 
 app_name = 'api'
+
+router = routers.SimpleRouter()
+router.register('questions', QuestionViewSet)
 
 urlpatterns = [
     # ----- Authentication -----
@@ -28,3 +33,5 @@ urlpatterns = [
     # path('mypage/<int:year>/<int:month>/', ???)
     # path('mypage/<int:year>/<int:month>/<int:day>/', ???)
 ]
+
+urlpatterns += router.urls

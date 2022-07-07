@@ -61,3 +61,11 @@ class SigninSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         pass
+
+
+class UserInfoSerializer(serializers.ModelSerializer):
+    """User 정보 Serializer"""
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
