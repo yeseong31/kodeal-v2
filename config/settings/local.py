@@ -1,7 +1,11 @@
 import dj_database_url
+import openai
 
 from . import my_settings
-from .base import *
+
+openai.api_key = my_settings.OPENAI_CODEX_KEY
+openai.Engine.list()
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = my_settings.SECRET_KEY
@@ -30,3 +34,7 @@ SERVER_EMAIL = my_settings.EMAIL['SERVER_EMAIL']
 
 # Generate JWT Token
 JWT_SECRET_KEY = my_settings.JWT_SECRET_KEY
+
+# Naver Papago
+CLIENT_ID = my_settings.CLIENT_ID
+CLIENT_SECRET = my_settings.CLIENT_SECRET

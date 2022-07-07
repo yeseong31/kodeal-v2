@@ -2,7 +2,7 @@ import json
 import ssl
 import urllib
 
-from config.settings.my_settings import CLIENT_ID, CLIENT_SECRET
+from config.settings.base import CLIENT_ID, CLIENT_SECRET
 
 
 def papago(text):
@@ -14,8 +14,8 @@ def papago(text):
     url = "https://openapi.naver.com/v1/papago/n2mt"
 
     request = urllib.request.Request(url)
-    request.add_header("X-Naver-Client-Id", CLIENT_ID)
-    request.add_header("X-Naver-Client-Secret", CLIENT_SECRET)
+    request.add_header("X-Naver-Client-Id", get_papago_client_id())
+    request.add_header("X-Naver-Client-Secret", get_papago_client_secret())
 
     context = ssl._create_unverified_context()
     response = urllib.request.urlopen(request, data=data.encode("utf-8"), context=context)
@@ -29,3 +29,21 @@ def papago(text):
     else:
         print("Error Code:" + rescode)
         return 'ERROR'
+
+
+def get_papago_client_id():
+    """Papago CLIENT ID KEY 조회 및 확인"""
+    client_id = CLIENT_ID
+    if client_id is None:
+        from config.settings.local import CLIENT_ID as CLIENT_ID_LOCAL
+        client_id = CLIENT_ID_LOCAL
+    return client_id
+
+
+def get_papago_client_secret():
+    """Papago CLIENT SECRET KEY 조회 및 확인"""
+    client_secret = CLIENT_SECRET
+    if client_secret is None:
+        from config.settings.local import CLIENT_SECRET as CLIENT_SECRET_LOCAL
+        client_secret = CLIENT_SECRET_LOCAL
+    return client_secret

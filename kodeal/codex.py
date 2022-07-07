@@ -2,11 +2,6 @@ import json
 
 import openai
 
-from config.settings import my_settings
-
-openai.api_key = my_settings.OPENAI_CODEX_KEY
-openai.Engine.list()
-
 
 def get_answer_and_keyword(question, language):
     """

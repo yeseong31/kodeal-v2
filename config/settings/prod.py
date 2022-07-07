@@ -1,6 +1,12 @@
 import dj_database_url
+import openai
 
 from .base import *
+
+
+openai.api_key = os.environ['OPENAI_CODEX_KEY']
+openai.Engine.list()
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
@@ -45,3 +51,7 @@ REDIRECT_PAGE = os.environ['REDIRECT_PAGE']
 
 # Generate JWT Token
 JWT_SECRET_KEY = os.environ['JWT_SECRET_KEY']
+
+# Naver Papago
+CLIENT_ID = os.environ['CLIENT_ID']
+CLIENT_SECRET = os.environ['CLIENT_SECRET']

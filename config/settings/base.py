@@ -134,3 +134,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Generate JWT Token
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
+
+# Naver Papago
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
