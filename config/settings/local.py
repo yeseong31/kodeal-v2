@@ -1,6 +1,7 @@
 import dj_database_url
 import openai
 
+from .base import *  # local server 운영 시 반드시 필요
 from . import my_settings
 
 openai.api_key = my_settings.OPENAI_CODEX_KEY
