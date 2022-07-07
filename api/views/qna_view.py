@@ -7,7 +7,7 @@ from kodeal.models import Question
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
+    queryset = Question.objects.all().order_by('-create_date')
     permission_classes = [CustomReadOnly]
 
     filter_backends = [DjangoFilterBackend]
