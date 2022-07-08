@@ -1,13 +1,23 @@
-from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
+
+from api.permissions import CustomReadOnly
+from api.serializers import QuestionSerializer, QuestionCreateSerializer
+from kodeal.models import Question
 
 
-class CodexListView(APIView):
-    """OpenAI Codex API"""
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all().order_by('-create_date')
+    permission_classes = [CustomReadOnly]
 
-    def get(self, pk: int):
-        """특정 사용자의 질문 목록 조회"""
-        pass
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['author']
 
-    def post(self):
-        """OpenAI Codex 질문&답변 생성"""
-        pass
+    def get_serializer_class(self):
+        if self.action == 'list' or 'retrieve':
+            return QuestionSerializer
+        return QuestionCreateSerializer
+
+    def perform_create(self, serializer):
+        question = Question.objects.get(user=self.request.user)
+        serializer.save(author=self.request.user)

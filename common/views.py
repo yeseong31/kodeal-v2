@@ -1,5 +1,3 @@
-import os
-
 import jwt
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
@@ -14,7 +12,6 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from common.forms import UserForm
 from common.messages import message
 from common.tokens import get_jwt_token
-from config.settings.base import JWT_SECRET_KEY
 
 
 def signup(request):

@@ -1,5 +1,7 @@
 # Kodeal
 
+## 🌐 [Deploy Web Page](https://kodeal.herokuapp.com/) 🌐
+
 ## 🛠️ Language & Tools  🛠️
 ![Python: Version](https://img.shields.io/badge/Python-3.10.5-3776AB.svg?logo=Python&logoColor=white)
 ![Django: Version](https://img.shields.io/badge/Django-4.0.6-092E20.svg?logo=Django&logoColor=white)
