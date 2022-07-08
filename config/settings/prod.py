@@ -40,13 +40,8 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 # Email Authentication
-EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
-EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
-EMAIL_PORT = os.environ['EMAIL_PORT']
-EMAIL_HOST = os.environ['EMAIL_HOST']
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-SERVER_EMAIL = os.environ['SERVER_EMAIL']
 REDIRECT_PAGE = os.environ['REDIRECT_PAGE']
 
 # Generate JWT Token

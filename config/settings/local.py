@@ -1,14 +1,14 @@
 import dj_database_url
 import openai
 
-from . import my_settings
+from .base import *
 
-openai.api_key = my_settings.OPENAI_CODEX_KEY
+openai.api_key = env.get_value('OPENAI_CODEX_KEY')
 openai.Engine.list()
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = my_settings.SECRET_KEY
+SECRET_KEY = env.get_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -18,23 +18,32 @@ ALLOWED_HOSTS = []
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = my_settings.DATABASES
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env.get_value('LOCAL_DB_NAME'),
+        'USER': env.get_value('LOCAL_DB_USER'),
+        'PASSWORD': env.get_value('LOCAL_DB_PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+            'use_unicode': True,
+        },
+    }
+}
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 # Email Authentication
-EMAIL_BACKEND = my_settings.EMAIL['EMAIL_BACKEND']
-EMAIL_USE_TLS = my_settings.EMAIL['EMAIL_USE_TLS']
-EMAIL_PORT = my_settings.EMAIL['EMAIL_PORT']
-EMAIL_HOST = my_settings.EMAIL['EMAIL_HOST']
-EMAIL_HOST_USER = my_settings.EMAIL['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = my_settings.EMAIL['EMAIL_HOST_PASSWORD']
-SERVER_EMAIL = my_settings.EMAIL['SERVER_EMAIL']
+EMAIL_HOST_USER = env.get_value('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env.get_value('EMAIL_HOST_PASSWORD')
 
 # Generate JWT Token
-JWT_SECRET_KEY = my_settings.JWT_SECRET_KEY
+JWT_SECRET_KEY = env.get_value('JWT_SECRET_KEY')
 
 # Naver Papago
-CLIENT_ID = my_settings.CLIENT_ID
-CLIENT_SECRET = my_settings.CLIENT_SECRET
+CLIENT_ID = env.get_value('CLIENT_ID')
+CLIENT_SECRET = env.get_value('CLIENT_SECRET')

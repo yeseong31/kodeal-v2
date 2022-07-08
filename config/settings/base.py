@@ -13,12 +13,14 @@ import os
 
 import environ
 
-env = environ.Env()
-environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+env = environ.Env()
+environ.Env.read_env(
+    env_file=os.path.join(BASE_DIR, '.env')
+)
 
 # Application definition
 
@@ -131,6 +133,12 @@ LOGIN_REDIRECT_URL = '/'
 # 로그아웃 시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
 
+# Email Authentication
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+SERVER_EMAIL = 'Kodeal'
 
 # Generate JWT Token
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
