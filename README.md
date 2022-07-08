@@ -39,67 +39,24 @@
   
 <br>
 
-- 패키지 설치 이후 프로젝트 내 `config/settings` 위치로 이동하여 `my_settings.py` 파일을 생성합니다.
-  ```python
-  """my_settings.py"""
-  
-  # ----- Django settings -----
-  DJANGO_SECRET_KEY =         # Django 프로젝트의 SECRET_KEY
-  # ----- MariaDB(MySQL) settings -----
-  DB_NAME =  		    # 데이터베이스 이름
-  DB_USER =   		    # 데이터베이스 User 이름
-  DB_PASSWORD = 		    # 데이터베이스 비밀번호
-  # ----- Email settings -----
-  EMAIL_HOST_USER =  	    # 이메일 주소(인증 링크 발송)
-  EMAIL_HOST_PASSWORD = 	    # 이메일 비밀번호(인증 링크 발송) - 별도 설정 필요
-  # ----- OpenAI Codex Key -----
-  OPENAI_CODEX_KEY =     # OpenAI Codex API Key
-  # ----- Naver Papago -----
-  CLIENT_ID =                 # Papago API Client ID
-  CLIENT_SECRET =        # Papago API Client Secret Key
-  # ----- Amazon S3 -----
-  AWS_ACCESS_KEY_ID =                # S3Access key ID
-  AWS_SECRET_ACCESS_KEY =       # S3 Secret access key
-  AWS_S3_BUCKET_LINK =             # S3 버킷 링크
-  # ----- JWT Token -----
-  JWT_SECRET_KEY =      # JWT 문자열
-  # ----- end of settings -----
-  
-  # SECURITY WARNING: keep the secret key used in production secret!
-  SECRET_KEY = {
-      'secret': DJANGO_SECRET_KEY,
-      'algorithm': 'HS256',
-  }
-
-  DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.mysql',
-          'NAME': DB_NAME,
-          'USER': DB_USER,
-          'PASSWORD': DB_PASSWORD,
-          'HOST': '127.0.0.1',
-          'PORT': '3306',
-      }
-  }
-
-  # Email Authentication
-  EMAIL = {
-      'EMAIL_BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
-      'EMAIL_USE_TLS': True,
-      'EMAIL_PORT': '587',
-      'EMAIL_HOST': 'smtp.gmail.com',
-      'EMAIL_HOST_USER': EMAIL_HOST_USER,
-      'EMAIL_HOST_PASSWORD': EMAIL_HOST_PASSWORD,
-      'SERVER_EMAIL': 'KODEAL',
-      'REDIRECT_PAGE': 'http://127.0.0.1:8000/'
-  }
-  
-  # Amazon S3
-  AWS_REGION = 'ap-northeast-2'
-  AWS_STORAGE_BUCKET_NAME = 'kodeal-bucket'         # 버킷 이름
-  AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
-  AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
-  DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+- 패키지 설치 이후 프로젝트의 최상위 디렉터리에 `.env` 파일을 생성하고 다음의 내용을 입력합니다.
+  ```
+  SECRET_KEY=
+  CLEARDB_DATABASE_URL=
+  DB_HOST=
+  DB_NAME=
+  DB_PASSWORD=
+  DB_USER=
+  EMAIL_HOST_PASSWORD=
+  EMAIL_HOST_USER=
+  REDIRECT_PAGE=
+  JWT_SECRET_KEY=
+  OPENAI_CODEX_KEY=
+  CLIENT_ID=
+  CLIENT_SECRET=
+  LOCAL_DB_NAME=
+  LOCAL_DB_USER=
+  LOCAL_DB_PASSWORD=
   ```
 
 <br>
