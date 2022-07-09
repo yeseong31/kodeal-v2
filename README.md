@@ -74,3 +74,10 @@
   Starting development server at http://127.0.0.1:8000/
   Quit the server with CTRL-BREAK.
   ```
+  
+## ✏️ Basic Layout ✏️
+![image](https://user-images.githubusercontent.com/66625672/161430320-a59ec796-0448-45ce-b3ae-b048ecff6dd6.png)
+
+## ✨ Service Flow Chart ✨ 
+![image](https://user-images.githubusercontent.com/66625672/161430423-24ca87f0-f526-4441-a7b7-eb92199d6af8.png)
+
