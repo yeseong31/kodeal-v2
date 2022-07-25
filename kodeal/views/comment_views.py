@@ -37,6 +37,8 @@ def comment_vote(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user == comment.author:
         messages.error(request, '본인이 작성한 글은 추천할 수 없습니다.')
+    elif request.user in comment.voter.all():
+        comment.voter.remove(request.user)
     else:
         comment.voter.add(request.user)
     return redirect(f'{resolve_url("kodeal:question_detail", question_id=comment.question.id)}#comment_{comment.id}')

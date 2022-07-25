@@ -10,5 +10,8 @@ def answer_vote(request, question_id):
     Kodeal 답변 추천
     """
     answer = get_object_or_404(Answer, question=question_id)
-    answer.voter.add(request.user)
+    if request.user in answer.voter.all():
+        answer.voter.remove(request.user)
+    else:
+        answer.voter.add(request.user)
     return redirect('kodeal:question_detail', question_id=question_id)
