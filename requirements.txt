@@ -29,7 +29,7 @@ openpyxl==3.0.10
 packaging==21.3
 pandas==1.4.2
 pandas-stubs==1.2.0.61
-Pillow==9.1.1
+Pillow==9.3.0
 psycopg2-binary==2.9.3
 pycparser==2.21
 pyparsing==3.0.9
