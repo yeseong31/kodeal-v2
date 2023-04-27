@@ -1,14 +1,12 @@
 # Kodeal
 
-## 🌐 [Deploy Web Page](https://kodeal.herokuapp.com/) 🌐
-
 ## 🛠️ Language & Tools  🛠️
 ![Python: Version](https://img.shields.io/badge/Python-3.10.5-3776AB.svg?logo=Python&logoColor=white)
 ![Django: Version](https://img.shields.io/badge/Django-4.0.6-092E20.svg?logo=Django&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-003545.svg?logo=MariaDB&logoColor=white)
 ![OpenAI Codex](https://img.shields.io/badge/OpenAI-000000.svg?logo=OpenAI&logoColor=white)
 ![Heroku](https://img.shields.io/badge/Heroku-430098.svg?logo=Heroku&logoColor=white)
-<!--![Travis CI](https://img.shields.io/badge/TravisCI-3EAAAF.svg?logo=travis-ci&logoColor=white)-->
+![Travis CI](https://img.shields.io/badge/TravisCI-3EAAAF.svg?logo=travis-ci&logoColor=white)
 
 ## 🔧 Setup 🔧
 
@@ -23,7 +21,7 @@
 <br>
 
 - 원하는 위치로 이동하여 프로젝트를 clone합니다.
-  ```sh
+  ```bash
   $ git clone https://github.com/yeseong31/Django_Kodeal.git
   $ cd Django_Kodeal
   ```
@@ -31,7 +29,7 @@
 <br>
 
 - 프로젝트에 필요한 패키지를 설치합니다.
-  ```sh
+  ```bash
   (kodeal)$ pip install -r requirements.txt
   ```
 
@@ -47,13 +45,17 @@
   DB_NAME=
   DB_PASSWORD=
   DB_USER=
+  
   EMAIL_HOST_PASSWORD=
   EMAIL_HOST_USER=
+  
   REDIRECT_PAGE=
   JWT_SECRET_KEY=
+  
   OPENAI_CODEX_KEY=
   CLIENT_ID=
   CLIENT_SECRET=
+  
   LOCAL_DB_NAME=
   LOCAL_DB_USER=
   LOCAL_DB_PASSWORD=
@@ -62,7 +64,7 @@
 <br>
 
 - 모든 설정 완료 시 다음의 명령어로 로컬 서버를 실행할 수 있습니다.
-  ```sh
+  ```bash
   (kodeal)$ set DJANGO_SETTINGS_MODULE=config.settings.local
   (kodeal)$ python manage.py runserver
   Watching for file changes with StatReloader
